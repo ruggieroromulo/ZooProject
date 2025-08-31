@@ -21,7 +21,7 @@ public class Animal{
     Date dateOfBirth;
 
     @Column
-    int wheight;
+    Double wheight;
 
     @Column(nullable = false, updatable = false)
     private java.time.LocalDateTime createdAt;
@@ -33,7 +33,7 @@ public class Animal{
     public Animal(){
     }
 
-    public Animal(String name, Date dateOfBirth, int wheight){
+    public Animal(String name, Date dateOfBirth, Double wheight){
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.wheight = wheight;
@@ -44,11 +44,11 @@ public class Animal{
 
 
 
-    public int getWheight() {
+    public Double getWheight() {
         return wheight;
     }
 
-    public void setWheight(int wheight) {
+    public void setWheight(Double wheight) {
         this.wheight = wheight;
     }
 
