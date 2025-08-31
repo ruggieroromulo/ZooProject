@@ -15,13 +15,16 @@ public class Animal{
     Long  id;
 
     @Column
+    String species;
+
+    @Column
     String name;
 
     @Column
     Date dateOfBirth;
 
     @Column
-    Double wheight;
+    Double weight;
 
     @Column(nullable = false, updatable = false)
     private java.time.LocalDateTime createdAt;
@@ -33,23 +36,31 @@ public class Animal{
     public Animal(){
     }
 
-    public Animal(String name, Date dateOfBirth, Double wheight){
+    public Animal(String name, Date dateOfBirth, Double weight,  String species) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.wheight = wheight;
+        this.weight = weight;
+        this.species = species;
         this.createdAt = LocalDateTime.now(ZoneId.of("UTC-3"));
         this.updatedAt = LocalDateTime.now(ZoneId.of("UTC-3"));
     }
 
 
 
-
-    public Double getWheight() {
-        return wheight;
+    public String getSpecies() {
+        return species;
     }
 
-    public void setWheight(Double wheight) {
-        this.wheight = wheight;
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
     public LocalDateTime getCreatedAt() {

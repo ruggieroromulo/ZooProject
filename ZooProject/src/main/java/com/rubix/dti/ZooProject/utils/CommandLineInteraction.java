@@ -49,19 +49,20 @@ public class CommandLineInteraction {
     }
 
     private void registerAnimal() throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        System.out.println("== Register new animal == \n Insert a name: ");
+        System.out.println("== Register new animal == \n Insert a species: ");
+        String species = ArgValidations.validateIfIsEmpty(scanner);
+
+        System.out.println("Insert a animal name (opitional): ");
         String name = scanner.nextLine();
 
         System.out.println("Insert date of birth (yyyy-MM-dd): ");
         Date birthDate = ArgValidations.validateBirth(scanner);
 
         System.out.println("Insert weight: ");
-        String weightStr = scanner.nextLine();
-        double weight = Double.parseDouble(weightStr);
+        Double weight = ArgValidations.validateWeight(scanner);
 
-        Animal animalToSave = new Animal(name, birthDate , weight);
+        Animal animalToSave = new Animal(name, birthDate , weight, species);
         Animal animalReturned = animalService.createAnimal(animalToSave);
         System.out.println("Animal registered: " + animalReturned.getName());
     }

@@ -26,18 +26,44 @@ public class ArgValidations {
         return date;
     }
 
-//    public static Integer ValidateName(String arg){
-//        String name;
-//        try {
-//            if (name.length() = 0 {
-//                System.out.println("Incorrect name, please re-enter");
-//            }
-//        }catch (Exception e){
-//            System.out.println("Idade não é um número correto");
-//
-//        }finally {
-//            return name;
-//        }
-//    }
+    public static Double validateWeight(Scanner scanner){
+        boolean retry;
+        Double weight= null;
+        do{
+            try {
+                String weightStr = scanner.nextLine();
+                 weight = Double.parseDouble(weightStr);
+
+                retry=false;
+            }
+            catch (Exception e) {
+                System.out.println("Peso não é uma numero válido, por favor insira um número.");
+                retry=true;
+            }
+
+        } while(retry);
+        return weight;
+    }
+
+     public static String validateIfIsEmpty(Scanner scanner){
+        boolean retry;
+        String input= null;
+        do{
+            try {
+                String inputStr = scanner.nextLine();
+                if (inputStr == null || inputStr.trim().isEmpty()) {
+                    throw new IllegalArgumentException();
+                }
+                input = inputStr;
+                retry=false;
+            }
+            catch (Exception e) {
+                System.out.println("Campo não pode ser vazio. Digite novamente: ");
+                retry=true;
+            }
+
+        } while(retry);
+        return input;
+    }
 
 }
