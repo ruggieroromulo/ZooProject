@@ -1,15 +1,25 @@
 package com.rubix.dti.ZooProject.utils;
 
+import com.rubix.dti.ZooProject.model.Animal;
+import com.rubix.dti.ZooProject.service.AnimalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+@Component
 public class CommandLineInteraction {
 
+    @Autowired
+    private AnimalService animalService;
 
-    public static void init() {
-        System.out.println("Aplicação console Spring Boot iniciada!");
 
+    public CommandLineInteraction(AnimalService animalService) {
+        this.animalService = animalService;
+    }
+
+
+    public void init() {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
-        System.out.print("Enter your name: ");
-        String nome = scanner.nextLine();
-
         boolean exit = false;
 
         while (!exit) {
@@ -29,6 +39,15 @@ public class CommandLineInteraction {
 
         System.out.println("Aplicação finalizada.");
         scanner.close();
+    }
+
+    private void registerAnimal() {
+
+        Animal animalToSave = new Animal("Leo", new java.util.Date(), 5);
+
+
+        Animal animalReturned = animalService.createAnimal(animalToSave);
+        System.out.println("Animal registered: " + animalReturned.getName());
     }
 
     private static void removeAnimal() {
@@ -53,8 +72,7 @@ public class CommandLineInteraction {
         System.out.print("Choose an option: ");
     }
 
-    private static void registerAnimal() {
-    }
+
 
 
 

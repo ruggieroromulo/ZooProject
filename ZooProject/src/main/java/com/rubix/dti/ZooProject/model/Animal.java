@@ -3,6 +3,7 @@ package com.rubix.dti.ZooProject.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
@@ -10,7 +11,8 @@ public class Animal{
 
     @Id
     @Column(unique = true)
-    int  id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    Long  id;
 
     @Column
     String name;
@@ -19,8 +21,7 @@ public class Animal{
     Date dateOfBirth;
 
     @Column
-    int age;
-
+    int wheight;
 
     @Column(nullable = false, updatable = false)
     private java.time.LocalDateTime createdAt;
@@ -29,13 +30,26 @@ public class Animal{
     @Column(nullable = false, updatable = false)
     private java.time.LocalDateTime updatedAt;
 
-
-    public int getAge() {
-        return age;
+    public Animal(){
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public Animal(String name, Date dateOfBirth, int wheight){
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.wheight = wheight;
+        this.createdAt = LocalDateTime.now(ZoneId.of("UTC-3"));
+        this.updatedAt = LocalDateTime.now(ZoneId.of("UTC-3"));
+    }
+
+
+
+
+    public int getWheight() {
+        return wheight;
+    }
+
+    public void setWheight(int wheight) {
+        this.wheight = wheight;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -54,11 +68,11 @@ public class Animal{
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
