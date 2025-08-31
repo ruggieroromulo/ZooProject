@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Scanner;
 
 
 @Component
@@ -16,14 +16,17 @@ public class CommandLineInteraction {
     @Autowired
     private AnimalService animalService;
 
+    private final Scanner scanner;
+
 
     public CommandLineInteraction(AnimalService animalService) {
         this.animalService = animalService;
+        this.scanner = new Scanner(System.in);
     }
 
 
     public void init() throws ParseException {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
+
         boolean exit = false;
 
         while (!exit) {
@@ -35,17 +38,15 @@ public class CommandLineInteraction {
                 case "2": listAnimals(); break;
                 case "3": editAnimals(); break;
                 case "4": removeAnimal(); break;
-                case "6": exit = true; break;
+                case "5": exit = true; scanner.close(); break;
                 default: System.out.println("Invalid option!"); break;
             }
         }
 
-        scanner.close();
         System.out.println("Aplicação finalizada.");
     }
 
     private void registerAnimal() throws ParseException {
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         System.out.println("== Register new animal == \n Insert a name: ");
@@ -59,13 +60,7 @@ public class CommandLineInteraction {
         String weightStr = scanner.nextLine();
         double weight = Double.parseDouble(weightStr);
 
-
-
-        scanner.close();
-
         Animal animalToSave = new Animal(name, date , weight);
-
-
         Animal animalReturned = animalService.createAnimal(animalToSave);
         System.out.println("Animal registered: " + animalReturned.getName());
     }
