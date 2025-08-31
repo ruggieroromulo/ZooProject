@@ -2,11 +2,13 @@ package com.rubix.dti.ZooProject.utils;
 
 import com.rubix.dti.ZooProject.model.Animal;
 import com.rubix.dti.ZooProject.service.AnimalService;
+import com.rubix.dti.ZooProject.utils.validations.ArgValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 
@@ -53,14 +55,13 @@ public class CommandLineInteraction {
         String name = scanner.nextLine();
 
         System.out.println("Insert date of birth (yyyy-MM-dd): ");
-        String dateStr = scanner.nextLine();
-        java.util.Date date = formatter.parse(dateStr);
+        Date birthDate = ArgValidations.validateBirth(scanner);
 
         System.out.println("Insert weight: ");
         String weightStr = scanner.nextLine();
         double weight = Double.parseDouble(weightStr);
 
-        Animal animalToSave = new Animal(name, date , weight);
+        Animal animalToSave = new Animal(name, birthDate , weight);
         Animal animalReturned = animalService.createAnimal(animalToSave);
         System.out.println("Animal registered: " + animalReturned.getName());
     }
