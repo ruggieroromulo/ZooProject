@@ -59,7 +59,7 @@ public class CommandLineInteraction {
         System.out.println("Insert date of birth (yyyy-MM-dd): ");
         Date birthDate = ArgValidations.validateBirth(scanner);
 
-        System.out.println("Insert weight: ");
+        System.out.println("Insert weight(Kg): ");
         Double weight = ArgValidations.validateWeight(scanner);
 
         Animal animalToSave = new Animal(name.isEmpty() ? null : name, birthDate , weight, species);
