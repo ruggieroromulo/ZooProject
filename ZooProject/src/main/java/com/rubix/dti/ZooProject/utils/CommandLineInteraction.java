@@ -38,7 +38,6 @@ public class CommandLineInteraction {
                 case "6": exit = true; break;
                 default: System.out.println("Invalid option!"); break;
             }
-            System.out.println();
         }
 
         scanner.close();
