@@ -62,7 +62,7 @@ public class CommandLineInteraction {
         System.out.println("Insert weight: ");
         Double weight = ArgValidations.validateWeight(scanner);
 
-        Animal animalToSave = new Animal(name, birthDate , weight, species);
+        Animal animalToSave = new Animal(name.isEmpty() ? null : name, birthDate , weight, species);
         Animal animalReturned = animalService.createAnimal(animalToSave);
         System.out.println("Animal registered: " + animalReturned.getName());
     }

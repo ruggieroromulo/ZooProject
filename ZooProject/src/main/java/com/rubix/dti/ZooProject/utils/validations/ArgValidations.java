@@ -1,5 +1,7 @@
 package com.rubix.dti.ZooProject.utils.validations;
 
+import com.rubix.dti.ZooProject.exception.FutureDateException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -12,10 +14,19 @@ public class ArgValidations {
         do{
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                formatter.setLenient(false);
                 String dateStr = scanner.nextLine();
 
                 date = formatter.parse(dateStr);
+
+                if(date.after(new Date())){
+                    throw new FutureDateException();
+                }
                 retry=false;
+            }
+            catch (FutureDateException ex) {
+                System.out.println(ex.getMessage());
+                retry=true;
             }
             catch (Exception e) {
                 System.out.println("Data de nascimento não é uma data correta, por favor insira no formato yyyy-MM-dd");
