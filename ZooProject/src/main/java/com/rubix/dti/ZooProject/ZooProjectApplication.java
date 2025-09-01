@@ -1,6 +1,6 @@
 package com.rubix.dti.ZooProject;
 
-import com.rubix.dti.ZooProject.utils.CommandLineInteraction;
+import com.rubix.dti.ZooProject.view.CommandLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,20 +10,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ZooProjectApplication implements CommandLineRunner {
 
     @Autowired
-    CommandLineInteraction CommandLineInteraction;
+    CommandLine CommandLine;
 
 
-    public ZooProjectApplication(CommandLineInteraction CommandLineInteraction) {
-        this.CommandLineInteraction = CommandLineInteraction;
+    public ZooProjectApplication(CommandLine CommandLine) {
+        this.CommandLine = CommandLine;
 
     }
 
     public static void main(String[] args) {
+
         SpringApplication.run(ZooProjectApplication.class, args);
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        CommandLineInteraction.init();
+    public void run(String... args) {
+        CommandLine.init();
     }
 }

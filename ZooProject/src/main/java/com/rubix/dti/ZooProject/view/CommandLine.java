@@ -1,4 +1,4 @@
-package com.rubix.dti.ZooProject.utils;
+package com.rubix.dti.ZooProject.view;
 
 import com.rubix.dti.ZooProject.model.Animal;
 import com.rubix.dti.ZooProject.service.AnimalService;
@@ -6,7 +6,6 @@ import com.rubix.dti.ZooProject.utils.validations.ArgValidations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 
 
 @Component
-public class CommandLineInteraction {
+public class CommandLine {
 
     @Autowired
     private AnimalService animalService;
@@ -23,13 +22,13 @@ public class CommandLineInteraction {
     private List<Animal> listAnimal;
 
 
-    public CommandLineInteraction(AnimalService animalService) {
+    public CommandLine(AnimalService animalService) {
         this.animalService = animalService;
         this.scanner = new Scanner(System.in);
     }
 
 
-    public void init() throws ParseException {
+    public void init() {
 
         boolean exit = false;
 
@@ -50,12 +49,12 @@ public class CommandLineInteraction {
         System.out.println("Aplicação finalizada.");
     }
 
-    private void registerAnimal() throws ParseException {
+    private void registerAnimal() {
 
         System.out.println("== Register new animal == \n Insert a species: ");
         String species = ArgValidations.validateIfIsEmpty(scanner);
 
-        System.out.println("Insert a animal name (opitional): ");
+        System.out.println("Insert a animal name (optional): ");
         String name = scanner.nextLine();
 
         System.out.println("Insert date of birth (yyyy-MM-dd): ");
@@ -65,11 +64,12 @@ public class CommandLineInteraction {
         Double weight = ArgValidations.validateWeight(scanner);
 
         Animal animalToSave = new Animal(name.isEmpty() ? null : name, birthDate , weight, species);
-        Animal animalReturned = animalService.createAnimal(animalToSave);
-        System.out.println("Animal registered: " + animalReturned.getName());
+        animalService.createAnimal(animalToSave);
+        System.out.println("Animal registered successfully");
     }
 
     private void listAnimals() {
+        //TODO: listar em formato de tabela
         listAnimal = animalService.listAnimals();
         listAnimal.forEach(animal -> {
                 System.out.println("ID: " + animal.getId());
