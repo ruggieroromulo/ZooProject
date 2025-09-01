@@ -29,7 +29,6 @@ public class CommandLine {
 
 
     public void init() {
-
         boolean exit = false;
 
         while (!exit) {
@@ -64,7 +63,7 @@ public class CommandLine {
         Double weight = ArgValidations.validateWeight(scanner);
 
         Animal animalToSave = new Animal(name.isEmpty() ? null : name, birthDate , weight, species);
-        animalService.createAnimal(animalToSave);
+        animalService.createOrUpdateAnimal(animalToSave);
         System.out.println("Animal registered successfully");
     }
 
@@ -90,13 +89,64 @@ public class CommandLine {
         }
 
         System.out.println("Insert the ID of the animal to delete: ");
-        Long id = ArgValidations.deleteIdValidation(scanner, listAnimal);
+        Long id = ArgValidations.validateId(scanner, listAnimal);
         animalService.removeAnimal(id);
         System.out.println("Animal with ID " + id + " has been removed.");
     }
 
-    private static void editAnimals() {
+    private void editAnimals() {
+        listAnimals();
+        if (listAnimal.isEmpty()) {
+            System.out.println("No animals registered to update.");;
+            return;
+        }
 
+        System.out.println("Insert the ID of the animal to update: ");
+        Long id = ArgValidations.validateId(scanner, listAnimal);
+        Animal animal = listAnimal.stream().filter(a -> a.getId().equals(id)).findFirst().get();
+        setFieldsAndUpdate(id, animal);
+
+    }
+
+    private void setFieldsAndUpdate(Long id, Animal animal) {
+        boolean exit;
+        String option;
+        do {
+            exit = true;
+            System.out.printf("O que deseja alterar no animal com ID %d?\n", id);
+            showEditFields();
+            option = scanner.nextLine();
+
+            switch (option) {
+                case "1":
+                    System.out.println("== Insert a species: ");
+                    animal.setSpecies(ArgValidations.validateIfIsEmpty(scanner));
+                    break;
+                case "2":
+                    System.out.println("== Insert a name: ");
+                    String name = scanner.nextLine();
+                    animal.setName(name.isEmpty() ? null : name);
+                    break;
+                case "3":
+                    System.out.println("== Insert date of birth (yyyy-MM-dd): ");
+                    animal.setDateOfBirth(ArgValidations.validateBirth(scanner));
+                    break;
+                case "4":
+                    System.out.println("== Insert weight(Kg): ");
+                    animal.setWeight(ArgValidations.validateWeight(scanner));
+                    break;
+                case "5":
+                    return;
+                default: {
+                    System.out.println("Invalid option!");
+                    exit = false;
+                    break;
+                }
+            }
+        } while (!exit);
+
+        animalService.createOrUpdateAnimal(animal);
+        System.out.println("Animal with ID " + id + " has been updated.");
     }
 
     private static void showMenu() {
@@ -109,8 +159,14 @@ public class CommandLine {
         System.out.print("Choose an option: ");
     }
 
-
-
-
+    private static void showEditFields() {
+        System.out.println("== Edit ==");
+        System.out.println("1 - Species ");
+        System.out.println("2 - Name ");
+        System.out.println("3 - Date of Birth ");
+        System.out.println("4 - Weight ");
+        System.out.println("5 - Exit");
+        System.out.print("Choose an option: ");
+    }
 
 }

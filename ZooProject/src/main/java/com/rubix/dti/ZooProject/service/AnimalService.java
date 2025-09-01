@@ -18,8 +18,8 @@ public class AnimalService {
         this.animalRepository = animalRepository;
     }
 
-    public Animal createAnimal(Animal animal){
-        return animalRepository.save(animal);
+    public void createOrUpdateAnimal(Animal animal){
+        animalRepository.save(animal);
     }
 
     public List<Animal> listAnimals(){

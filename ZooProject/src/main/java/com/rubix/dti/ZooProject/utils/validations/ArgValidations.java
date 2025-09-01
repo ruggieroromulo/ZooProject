@@ -4,7 +4,6 @@ import com.rubix.dti.ZooProject.exception.AnimalIdNotFound;
 import com.rubix.dti.ZooProject.exception.FutureDateException;
 import com.rubix.dti.ZooProject.exception.IntervalNumberException;
 import com.rubix.dti.ZooProject.model.Animal;
-import org.antlr.v4.runtime.misc.Interval;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,7 +54,7 @@ public class ArgValidations {
 
                 retry = false;
             } catch (IntervalNumberException ex) {
-                System.out.printf(ex.getMessage());
+                System.out.println(ex.getMessage());
                 retry = true;
             } catch (Exception e) {
                 System.out.println("Peso não é uma numero válido, por favor insira um número.");
@@ -85,7 +84,7 @@ public class ArgValidations {
         } while (retry);
         return input;
     }
-    public static Long deleteIdValidation(Scanner scanner, List<Animal> listAnimal) {
+    public static Long validateId(Scanner scanner, List<Animal> listAnimal) {
         boolean retry;
         Long input = null;
         do {
