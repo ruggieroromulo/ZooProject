@@ -1,11 +1,14 @@
 package com.rubix.dti.ZooProject.utils.validations;
 
+import com.rubix.dti.ZooProject.exception.AnimalIdNotFound;
 import com.rubix.dti.ZooProject.exception.FutureDateException;
 import com.rubix.dti.ZooProject.exception.IntervalNumberException;
+import com.rubix.dti.ZooProject.model.Animal;
 import org.antlr.v4.runtime.misc.Interval;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class ArgValidations {
@@ -76,6 +79,33 @@ public class ArgValidations {
                 retry = false;
             } catch (Exception e) {
                 System.out.println("Campo não pode ser vazio. Digite novamente: ");
+                retry = true;
+            }
+
+        } while (retry);
+        return input;
+    }
+    public static Long deleteIdValidation(Scanner scanner, List<Animal> listAnimal) {
+        boolean retry;
+        Long input = null;
+        do {
+            try {
+                String inputStr = scanner.nextLine();
+                input = Long.parseLong(inputStr);
+
+                Long finalInput = input;
+                boolean idExists = listAnimal.stream().anyMatch(animal -> animal.getId().equals(finalInput));
+                if (!idExists) {
+                    throw new AnimalIdNotFound();
+                }
+                retry = false;
+            }
+            catch (AnimalIdNotFound ex) {
+                System.out.println(ex.getMessage());
+                retry = true;
+            }
+            catch (Exception e) {
+                System.out.println("ID deve ser um número. Digite novamente: ");
                 retry = true;
             }
 
