@@ -57,7 +57,10 @@
         </dependency>
     </dependencies>
 
+    <packaging>jar</packaging>
+
 	<build>
+        <finalName>zoo-project</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
