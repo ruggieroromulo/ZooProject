@@ -49,6 +49,7 @@ To run the console application, use the following command in the project's root 
 ```
 
 </br>
+
 ## Using the Application
 
 When you start the application, an interactive menu will be displayed in the console, allowing you to perform CRUD operations.
@@ -66,6 +67,7 @@ When you start the application, an interactive menu will be displayed in the con
 ![Demo](Images/demo.jpeg)
 
 </br>
+
 ## Database
 
 This project uses **SQLite**, a lightweight, embedded database that stores data in a local file (`zoo.db`), created in the project's root directory.
@@ -75,6 +77,7 @@ The SQL script for creating the `animal` table is located in `database/schema.sq
 ![SqlCode](Images/tableSqlGenerator.png)
 
 </br>
+
 ## Input Validation
 To ensure data integrity and consistency, the application implements a robust validation system during the animal registration and update processes. The user is always guided with clear messages and prompted to correct the data until the input is valid.
 
@@ -92,6 +95,7 @@ The following validation rules have been implemented:
 These validations ensure that only coherent and complete data is persisted to the database.
 
 </br>
+
 ## Additional Features
 
 This section describes a aditional features that have been or could be implemented in the project.
