@@ -67,6 +67,7 @@
             Animal animalToSave = new Animal(name.isEmpty() ? null : name, birthDate , weight, species);
             animalService.createOrUpdateAnimal(animalToSave);
             System.out.println("Animal registered successfully");
+            System.out.println(); //<br
         }
 
         private void listAnimals() {
@@ -124,6 +125,7 @@
             System.out.printf("Name: %s%n", name);
             System.out.printf("Date of Birth: %s%n", birthDate);
             System.out.printf("Weight (Kg): %s%n", weight);
+            System.out.println();
 
         }
 
@@ -137,6 +139,7 @@
             Long id = ArgValidations.validateId(scanner, listAnimal);
             animalService.removeAnimal(id);
             System.out.println("Animal with ID " + id + " has been removed.");
+            System.out.println();
         }
 
         private void editAnimals() {
@@ -149,6 +152,7 @@
             Long id = ArgValidations.validateId(scanner, listAnimal);
             Animal animal = listAnimal.stream().filter(a -> a.getId().equals(id)).findFirst().get();
             setFieldsAndUpdate(id, animal);
+            System.out.println();
 
         }
 
@@ -191,6 +195,7 @@
 
             animalService.createOrUpdateAnimal(animal);
             System.out.println("Animal with ID " + id + " has been updated.");
+            System.out.println();
         }
 
         private static void showMenu() {

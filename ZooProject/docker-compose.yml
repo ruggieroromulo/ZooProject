@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  zoo-app:
+    build: .
+    container_name: zoo-project
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+
+
