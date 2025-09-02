@@ -30,7 +30,7 @@ public class Animal{
     private java.time.LocalDateTime createdAt;
 
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private java.time.LocalDateTime updatedAt;
 
     public Animal(){

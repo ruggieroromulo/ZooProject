@@ -9,6 +9,7 @@
     import org.springframework.stereotype.Component;
 
     import java.text.SimpleDateFormat;
+    import java.time.LocalDateTime;
     import java.util.Date;
     import java.util.List;
     import java.util.Scanner;
@@ -186,7 +187,7 @@
                     }
                 }
             } while (!exit);
-
+            animal.setUpdatedAt(LocalDateTime.now());
             animalService.createOrUpdateAnimal(animal);
             System.out.println("Animal with ID " + id + " has been updated.");
         }
