@@ -52,6 +52,7 @@
 
         private void registerAnimal() {
 
+            System.out.println();
             System.out.println("== REGISTER NEW ANIMAL == \n Insert a species: ");
             String species = ArgValidations.validateIfIsEmpty(scanner);
 
@@ -67,7 +68,6 @@
             Animal animalToSave = new Animal(name.isEmpty() ? null : name, birthDate , weight, species);
             animalService.createOrUpdateAnimal(animalToSave);
             System.out.println("Animal registered successfully");
-            System.out.println(); //<br
         }
 
         private void listAnimals() {
@@ -77,7 +77,7 @@
                 System.out.println("Use the ‘Register Animal’ option to add new animals.");
                 return;
             }
-
+            System.out.println();
             System.out.println("\n=== LIST OF ANIMALS ===");
             System.out.println("Total number of registered animals: " + listAnimal.size());
             System.out.println();
@@ -101,7 +101,6 @@
             });
 
             System.out.println("─".repeat(75));
-            System.out.println();
         }
 
         private void findAnimalById() {
@@ -109,7 +108,7 @@
             if (!ArgValidations.validateIfExistAnimals(listAnimal)) {
                 return;
             }
-
+            System.out.println();
             System.out.println("\n=== FIND BY ID ===");
             System.out.println("Insert the ID of the animal to find: ");
             Long id = ArgValidations.validateId(scanner, listAnimal);
@@ -125,8 +124,6 @@
             System.out.printf("Name: %s%n", name);
             System.out.printf("Date of Birth: %s%n", birthDate);
             System.out.printf("Weight (Kg): %s%n", weight);
-            System.out.println();
-
         }
 
         private void removeAnimal() {
@@ -139,7 +136,6 @@
             Long id = ArgValidations.validateId(scanner, listAnimal);
             animalService.removeAnimal(id);
             System.out.println("Animal with ID " + id + " has been removed.");
-            System.out.println();
         }
 
         private void editAnimals() {
@@ -147,13 +143,11 @@
             if (listAnimal.isEmpty()) {
                 return;
             }
-
+            System.out.println();
             System.out.println("Insert the ID of the animal to update: ");
             Long id = ArgValidations.validateId(scanner, listAnimal);
             Animal animal = listAnimal.stream().filter(a -> a.getId().equals(id)).findFirst().get();
             setFieldsAndUpdate(id, animal);
-            System.out.println();
-
         }
 
         private void setFieldsAndUpdate(Long id, Animal animal) {
@@ -195,10 +189,10 @@
 
             animalService.createOrUpdateAnimal(animal);
             System.out.println("Animal with ID " + id + " has been updated.");
-            System.out.println();
         }
 
         private static void showMenu() {
+            System.out.println();//<br> to separate the menu from previous output
             System.out.println("== ZOO MANAGEMENT ==");
             System.out.println("1 - Register new animal");
             System.out.println("2 - List all animals");
