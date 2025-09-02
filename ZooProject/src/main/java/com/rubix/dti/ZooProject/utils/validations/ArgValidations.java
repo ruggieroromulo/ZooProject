@@ -31,7 +31,7 @@ public class ArgValidations {
                 System.out.println(ex.getMessage());
                 retry = true;
             } catch (Exception e) {
-                System.out.println("Data de nascimento não é uma data correta, por favor insira no formato yyyy-MM-dd");
+                System.out.println("The date of birth is not correct. Please enter it in the following format: yyyy-MM-dd");
                 retry = true;
             }
 
@@ -57,7 +57,7 @@ public class ArgValidations {
                 System.out.println(ex.getMessage());
                 retry = true;
             } catch (Exception e) {
-                System.out.println("Peso não é uma numero válido, por favor insira um número.");
+                System.out.println("Weight is not a valid number, please enter a number.");
                 retry = true;
             }
 
@@ -77,7 +77,7 @@ public class ArgValidations {
                 input = inputStr;
                 retry = false;
             } catch (Exception e) {
-                System.out.println("Campo não pode ser vazio. Digite novamente: ");
+                System.out.println("Field cannot be empty. Please re-enter: ");
                 retry = true;
             }
 
@@ -104,11 +104,19 @@ public class ArgValidations {
                 retry = true;
             }
             catch (Exception e) {
-                System.out.println("ID deve ser um número. Digite novamente: ");
+                System.out.println("ID must be a number. Please re-enter: ");
                 retry = true;
             }
 
         } while (retry);
         return input;
+    }
+
+    public static boolean validateIfExistAnimals(List<Animal> listAnimal) {
+        if (listAnimal.isEmpty()) {
+            System.out.println("No animals registered.");
+            return false;
+        }
+        return true;
     }
 }
