@@ -72,6 +72,22 @@ The SQL script for creating the `animal` table is located in `database/schema.sq
 
 ![SqlCode](Images/tableSqlGenerator.png)
 
+## Input Validation
+To ensure data integrity and consistency, the application implements a robust validation system during the animal registration and update processes. The user is always guided with clear messages and prompted to correct the data until the input is valid.
+
+The following validation rules have been implemented:
+
+*   **Required Fields:** All fields marked as required (`species` and `date_of_brith` and `weight`) are checked to ensure they are not left blank. If a user attempts to submit an empty value, they will be notified and prompted to enter the data again.
+
+*   **Weight Validation (`wieght`):** The `weight` (weight) field, when provided, must be a positive and realistic numeric value. The application validates that the value is within the range **greater than 0** and **less than or equal to 6000** kg.
+
+*   **Date Validation (`date_of_birth`):** The date of birth undergoes multiple checks to ensure its correctness:
+    *   **Valid Format:** The date must be entered strictly in the `YYYY-MM-DD` format.
+    *   **No Future Dates:** The application verifies that the entered date is not later than the current date.
+    *   **Calendar Validity:** The system validates that the month (1-12) and day values are realistic (e.g., it does not allow February 30th in leap years or January 32nd).
+
+These validations ensure that only coherent and complete data is persisted to the database.
+
 
 ## Additional Features
 
@@ -83,7 +99,7 @@ To ensure code quality and robustness, unit tests were implemented using JUnit 5
   mvn test
 ```
 
-## Containerization (Docker)
+### Containerization (Docker)
 To facilitate distribution and execution in different environments, the application can be containerized with Docker, following the steps mentioned above.
 This will start the container and open the console application's menu directly in your terminal.
 
